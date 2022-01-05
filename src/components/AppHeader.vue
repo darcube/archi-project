@@ -1,11 +1,12 @@
 <template>
   <header>
     <img alt="Vue logo" src="../assets/logo.png" height="50">
-    <p>My Vue.js Application</p>
+    <p>Archi Project</p>
     <nav>
       <ul>
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/about">About</router-link></li>
+        <li><router-link :to="{ path: '/about', hash: '#apply' }">test</router-link></li>
       </ul>
     </nav>
   </header>
@@ -14,11 +15,13 @@
 <style lang="scss">
   header {
     display: flex;
-    border-bottom: 1px solid #ccc;
     padding: .5rem 1rem;
+    //background-color: black;
 
     p {
-      margin-left: 1rem;
+      color: white;
+      margin: .7rem 0 0 1rem;
+      font-size: 2em;
     }
   }
 
@@ -31,7 +34,12 @@
 
     ul li {
       display: inline-flex;
-      margin-left: 1rem;
+      margin: 1rem 3rem 0.5rem;
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
     }
   }
 </style>

@@ -14,3 +14,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  footer {
+    bottom: 0;
+    position: absolute;
+  }
+
+</style>
