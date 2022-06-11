@@ -1,7 +1,7 @@
 <template>
-  <footer>
-    <p>Copyright &copy; {{ year }}</p>
-  </footer>
+  <el-footer height="50px" padding="20px">
+    <div>Copyright &copy; {{ year }}</div>
+  </el-footer>
 </template>
 
 <script>
@@ -16,9 +16,10 @@ export default {
 </script>
 
 <style lang="scss">
-  footer {
-    bottom: 0;
-    position: absolute;
+  .el-footer {
+    padding-top: 10px;
+    text-align: left;
+    width: 100%;
   }
 
 </style>

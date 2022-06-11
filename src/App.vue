@@ -1,7 +1,9 @@
 <template>
+<el-container>
   <app-header />
   <router-view />
   <app-footer />
+</el-container>
 </template>
 
 <script>
@@ -19,11 +21,15 @@ export default {
 <style lang="scss">
 body {
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+}
+
+.el-container {
+  display: block;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
