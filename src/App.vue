@@ -29,7 +29,7 @@ body {
 }
 
 #app {
-  font-family: Lato, Helvetica, Arial, sans-serif;
+  font-family: "Josefin Sans", Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -47,5 +47,9 @@ body {
       color: #42b983;
     }
   }
+}
+
+@media (max-width: 768px) {
+
 }
 </style>

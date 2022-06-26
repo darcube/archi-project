@@ -1,19 +1,54 @@
 <template>
-  <el-header height="50px">
+  <el-header height="70px">
     <!-- <img alt="Vue logo" src="../assets/logo.png" height="50">
     <p>Archi Project</p> -->
-    <nav>
+    <img :src="logo" class="logo__img" />
+    <div class="sidemenu">
+      <button class="sidemenu__btn" @click="navOpen=!navOpen" :class="{active: navOpen}">
+        <span class="top"></span>
+        <span class="mid"></span>
+        <span class="bottom"></span>
+      </button>
+      <div class="sidemenu__wrapper">
+        <nav :class="{active: navOpen}">
+          <ul>
+            <li><router-link to="/">Start</router-link></li>
+            <li><router-link to="/projects">Projekty</router-link></li>
+            <!-- <li><router-link to="/about">Curriculum Vitae</router-link></li> -->
+            <li><a href="./CV.pdf" target="_blank">Curriculum Vitae</a></li>
+            <li><router-link to="/contact">Kontakt</router-link></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- <nav>
       <ul>
         <li><router-link to="/">Start</router-link></li>
-        <li><router-link to="/projects">Projekty</router-link></li>
-        <li><router-link to="/about">O mnie</router-link></li>
+        <li><router-link to="/projects">Projekty</router-link></li> -->
+        <!-- <li><router-link to="/about">Curriculum Vitae</router-link></li> -->
+        <!-- <li><a href="./testpdf.pdf" target="_blank">Curriculum Vitae</a></li>
         <li><router-link to="/contact">Kontakt</router-link></li>
       </ul>
-    </nav>
+    </nav> -->
   </el-header>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+      navOpen: false,
+      logo: require('../assets/logo.svg')
+    }
+  }
+}
+</script>
+
 <style lang="scss">
+
+  .logo__img {
+    padding: 10px;
+  }
 
   .router-link-active {
     border-bottom: solid 2px #ffdd00;
@@ -40,23 +75,111 @@
     }
   }
 
-  nav {
-    margin-left: auto;
-    z-index: inherit;
+  .sidemenu {
+    width: 100%;
+    align-self: center;
 
-    ul {
-      list-style: none;
-      margin: 0;
+    .sidemenu__btn {
+      display: none;
     }
 
-    ul li {
-      display: inline-flex;
-      margin: 1rem 3rem 0.5rem;
+    nav {
+      margin-left: auto;
+      z-index: inherit;
+      text-align: right;
 
-      a {
-        color: black;
-        text-decoration: none;
+      ul {
+        list-style: none;
+        margin: 0;
+      }
+
+      ul li {
+        display: inline-flex;
+        margin: 1rem 2.5rem 0.5rem;
+
+        a {
+          color: black;
+          text-decoration: none;
+        }
       }
     }
   }
+
+@media (max-width: 768px) {
+  .el-header {
+    height: 100px;
+  }
+  .sidemenu {
+    text-align: end;
+
+    nav {
+      display: none;
+    }
+    nav.active {
+      width: 200px;
+      display: block;
+      position: fixed;
+      left: 0;
+      z-index: 99;
+      width: 100%;
+      background: #ffffffde;
+      top: 0;
+      padding-top: 100px;
+
+      ul li {
+        display: block;
+      }
+    }
+
+    .sidemenu {
+      &__btn {
+        display: inline-block;
+        margin: 0 1rem;
+        width: 50px;
+        height: 50px;
+        background: none;
+        border: none;
+        position: relative;
+        z-index: 100;
+        appearance: none;
+        cursor: pointer;
+        outline: none;
+
+        span {
+          display: block;
+          width: 20px;
+          height: 2px;
+          margin: auto;
+          background: black;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          transition: all .4s ease;
+
+          &.top {
+            transform: translateY(-8px);
+          }
+
+          &.bottom {
+            transform: translateY(8px);
+          }
+        }
+        &.active{
+          .top {
+            transform: rotate(-45deg);
+          }
+          .mid{
+            transform: translateX(-20px) rotate(360deg);
+            opacity: 0;
+          }
+          .bottom {
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+}
 </style>

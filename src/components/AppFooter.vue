@@ -1,6 +1,6 @@
 <template>
   <el-footer height="50px" padding="20px">
-    <div>Copyright &copy; {{ year }}</div>
+    <div class="footer-content">Copyright &copy; {{ year }}</div>
   </el-footer>
 </template>
 
@@ -20,6 +20,11 @@ export default {
     padding-top: 10px;
     text-align: left;
     width: 100%;
+    display: flex;
+
+    .footer-content {
+      align-self: center;
+    }
   }
 
 </style>

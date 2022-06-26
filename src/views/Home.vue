@@ -1,11 +1,19 @@
 <template>
   <el-main class="home">
-    <div class="main-text top">ARCHITEKT</div>
-    <div class="main-text bottom">Edyta Sobieraj</div>
-    <el-container style="margin-top: calc(100vh - 40px);">
+    <el-container>
       <el-row>
-        <el-col  v-for="(asset, idx) in assets" :key="idx" :span="24 / (assets.length || 1)" class="asset-area">
-            <image-button :asset="asset"></image-button>
+        <el-col :xs="0" :sm="6"></el-col>
+        <el-col :xs="24" :sm="18" class="main-area">
+          <div class="main-text title">inż. arch.</div>
+          <div class="main-text name">Edyta Sobieraj</div>
+          <div class="main-text desc">Jestem studentką ostatniego roku architektury na Politechnice Poznańskiej. Zawodowo zajmuję się przede wszystkim grafiką 3D. Tworzę wizualizacje architektoniczne, a także teksturuję i optymalizuję modele pod VR. </div>
+        </el-col>
+      </el-row>
+    </el-container>
+    <el-container style="margin-top: calc(100vh - 500px);">
+      <el-row>
+        <el-col v-for="(asset, idx) in assets" :key="idx" :xs="24" :sm="24 / (assets.length || 1)" class="asset-area">
+            <image-button :asset="asset" :projectId="asset.substring(0,1)"></image-button>
         </el-col>
         <!-- <el-col :span="8"><div class="img-area"><img style="width: 100%" src="../assets/main-1.jpg"><span class="line"></span><span class="line-text">{{lineText}}</span></div></el-col>
         <el-col :span="8"><img style="width: 100%" src="../assets/main-2.jpg"></el-col>
@@ -55,6 +63,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+
 .asset-area {
   position: relative;
   width: 100%;
@@ -62,12 +71,13 @@ export default defineComponent({
   overflow: hidden;
 }
 
-</style>
+// </style>
 
-<style lang="scss">
+// <style lang="scss">
   body {
     background-color: white;
   }
+
   .home {
     // display: flex;
     overflow: hidden;
@@ -75,31 +85,70 @@ export default defineComponent({
     //background-color: black;
   }
 
+  .main-area {
+    padding-top: 250px;
+  }
+
   .main-text {
-    position: absolute;
+    //position: absolute;
     color: black;
-    font-family: Lato;
+    text-align: left;
+    //font-family: Lato;
   }
-  .main-text.top {
-    font-size: 13vw;
-    top: 30%;
-    left: 2%;
-    animation: 1s ease-out 0s 1 slideInFromTop;
-  }
-
-  .main-text.bottom {
-    font-size: 10vw;
-    top: 50%;
-    right: 10%;
-    animation: 1s ease-out 0s 1 slideInFromBottom;
+  .main-text.title {
+    font-size: 2vw;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    animation: opacityHighToLow 1s ease-in;
   }
 
-  @keyframes slideInFromTop {
+  .main-text.name {
+    font-size: 7vw;
+    margin-bottom: 20px;
+    animation: opacityHighToLow 1s ease-in;
+  }
+
+   .main-text.desc {
+    font-size: 3vw;
+    animation: opacityHighToLow 1s ease-in;
+  }
+
+  @media (max-width: 768px) {
+
+    .main-text {
+      padding: 0 30px;
+
+      &.title {
+        font-size: 18px;
+        animation: none;
+      }
+
+      &.name {
+        font-size: 35px;
+      }
+
+      &.desc {
+        font-size: 22px;
+      }
+    }
+
+    .home .asset-area {
+      height: 300px;
+      padding: 5px 0;
+    }
+
+    .img-btn-area {
+      padding: 5px 10px;
+    }
+
+  }
+
+  @keyframes opacityHighToLow {
     0% {
-      transform: translateY(-30%);
+      opacity: 0;
     }
     100% {
-      transform: translateY(0);
+      opacity: 1;
     }
   }
 
