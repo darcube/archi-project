@@ -1,7 +1,7 @@
 <template>
 <router-link :to="{ name: 'project',  params: { id: projectId || 1 }}">
   <div class="img-btn-area">
-    <img style="width: 100%" :src="require('../assets/' + asset)" class="img-btn">
+    <img style="width: 100%" :src="require('../assets/' + asset)" class="img-btn" @load="handleLoad">
     <div class="details-area">
         <span class="line"></span>
         <span class="text">{{lineText}}</span>
@@ -30,6 +30,9 @@ export default defineComponent({
   computed: {
   },
   methods: {
+    handleLoad () {
+      this.$emit('handle-load')
+    }
   }
 })
 </script>
@@ -55,6 +58,8 @@ export default defineComponent({
       transform: translateX(0);
     }
 }
+
+@media (min-width: 768px) {
 
 .img-btn-area {
   overflow: hidden;
@@ -102,6 +107,7 @@ export default defineComponent({
       }
     }
   }
+}
 }
 
 </style>

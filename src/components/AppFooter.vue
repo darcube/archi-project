@@ -1,5 +1,5 @@
 <template>
-  <el-footer height="50px" padding="20px">
+  <el-footer style="--el-footer-height: var(--footer-height)" padding="20px">
     <div class="footer-content">Copyright &copy; {{ year }}</div>
   </el-footer>
 </template>

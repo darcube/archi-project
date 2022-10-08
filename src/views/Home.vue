@@ -2,22 +2,20 @@
   <el-main class="home">
     <el-container>
       <el-row>
-        <el-col :xs="0" :sm="6"></el-col>
-        <el-col :xs="24" :sm="18" class="main-area">
+        <el-col :xs="0" :sm="1" :md="3" :lg="6"></el-col>
+        <el-col :xs="24" :sm="22" :md="19" :lg="14" class="main-area">
           <div class="main-text title">inż. arch.</div>
           <div class="main-text name">Edyta Sobieraj</div>
           <div class="main-text desc">Jestem studentką ostatniego roku architektury na Politechnice Poznańskiej. Zawodowo zajmuję się przede wszystkim grafiką 3D. Tworzę wizualizacje architektoniczne, a także teksturuję i optymalizuję modele pod VR. </div>
         </el-col>
+        <el-col :xs="0" :sm="1" :md="2" :lg="4"></el-col>
       </el-row>
     </el-container>
     <el-container style="margin-top: calc(100vh - 500px);">
       <el-row>
         <el-col v-for="(asset, idx) in assets" :key="idx" :xs="24" :sm="24 / (assets.length || 1)" class="asset-area">
-            <image-button :asset="asset" :projectId="asset.substring(0,1)"></image-button>
+            <image-button :asset="asset" :projectId="parseInt(asset.substring(0,1))"></image-button>
         </el-col>
-        <!-- <el-col :span="8"><div class="img-area"><img style="width: 100%" src="../assets/main-1.jpg"><span class="line"></span><span class="line-text">{{lineText}}</span></div></el-col>
-        <el-col :span="8"><img style="width: 100%" src="../assets/main-2.jpg"></el-col>
-        <el-col :span="8"><img style="width: 100%" src="../assets/main-3.jpg"></el-col> -->
       </el-row>
     </el-container>
   </el-main>
@@ -26,7 +24,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ImageButton from '@/components/ImageButton.vue'
-// import HelloWorld from '../components/HelloWorld.vue' // @ is an alias to /src
 
 export default defineComponent({
   name: 'Home',
@@ -41,7 +38,6 @@ export default defineComponent({
       },
       lineText: 'Szczegóły',
       assets: ['1/img0.png', '2/img0.png', '3/img0.png']
-      // asset: require('@/assets/main-1.jpg'),
     }
   },
   computed: {
@@ -86,7 +82,7 @@ export default defineComponent({
   }
 
   .main-area {
-    padding-top: 250px;
+    padding-top: 160px;
   }
 
   .main-text {
@@ -110,7 +106,77 @@ export default defineComponent({
 
    .main-text.desc {
     font-size: 3vw;
+    font-weight: lighter;
     animation: opacityHighToLow 1s ease-in;
+    line-height: 1.15;
+  }
+
+  @media (max-width: 1920px) {
+    .main-text {
+
+      &.title {
+        font-size: 2vw;
+      }
+
+      &.name {
+        font-size: 5vw;
+      }
+
+      &.desc {
+        font-size: 2.30vw;
+      }
+    }
+  }
+
+  @media (max-width: 1400px) {
+    .main-text {
+
+      &.title {
+        font-size: 2.3vw;
+      }
+
+      &.name {
+        font-size: 5.995vw;
+      }
+
+      &.desc {
+        font-size: 2.77vw;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .main-text {
+
+      &.title {
+        font-size: 2.851vw;
+      }
+
+      &.name {
+        font-size: 6.7955vw;
+      }
+
+      &.desc {
+        font-size: 3.77vw;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .main-text {
+
+      &.title {
+        font-size: 2.851vw;
+      }
+
+      &.name {
+        font-size: 6.7955vw;
+      }
+
+      &.desc {
+        font-size: 3.73vw;
+      }
+    }
   }
 
   @media (max-width: 768px) {
@@ -119,16 +185,16 @@ export default defineComponent({
       padding: 0 30px;
 
       &.title {
-        font-size: 18px;
+        font-size: 2.851vw;
         animation: none;
       }
 
       &.name {
-        font-size: 35px;
+        font-size: 9.9975vw;
       }
 
       &.desc {
-        font-size: 22px;
+        font-size: 3.73vw;
       }
     }
 
@@ -140,7 +206,40 @@ export default defineComponent({
     .img-btn-area {
       padding: 5px 10px;
     }
+  }
 
+  @media (max-width: 576px) {
+    .main-text {
+
+      &.title {
+        font-size: 4.377vw;
+      }
+
+      &.name {
+        font-size: 12.579vw;
+      }
+
+      &.desc {
+        font-size: 5.25vw;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main-text {
+
+      &.title {
+        font-size: 4.377vw;
+      }
+
+      &.name {
+        font-size: 12.579vw;
+      }
+
+      &.desc {
+        font-size: 6.25vw;
+      }
+    }
   }
 
   @keyframes opacityHighToLow {

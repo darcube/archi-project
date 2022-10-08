@@ -1,5 +1,5 @@
 <template>
-  <el-header height="70px">
+  <el-header style="--el-header-height: var(--header-height)" :class="{ 'navbar--hidden': !showNavbar }" class="navbar">
     <!-- <img alt="Vue logo" src="../assets/logo.png" height="50">
     <p>Archi Project</p> -->
     <img :src="logo" class="logo__img" />
@@ -38,8 +38,31 @@ export default {
   data () {
     return {
       navOpen: false,
-      logo: require('../assets/logo.svg')
+      logo: require('../assets/logo.svg'),
+      showNavbar: true,
+      lastScrollPosition: 0
     }
+  },
+  methods: {
+    onScroll () {
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop
+      if (currentScrollPosition < 0) {
+        return
+      }
+      // Stop executing this function if the difference between
+      // current scroll position and last scroll position is less than some offset
+      if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
+        return
+      }
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition
+      this.lastScrollPosition = currentScrollPosition
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeUnmount () {
+    window.removeEventListener('scroll', this.onScroll)
   }
 }
 </script>
@@ -56,6 +79,16 @@ export default {
     padding-right: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
+  }
+
+  .navbar {
+    transform: translate3d(0, 0, 0);
+    transition: 0.1s all ease-out;
+  }
+
+  .navbar.navbar--hidden {
+    box-shadow: none;
+    transform: translate3d(0, -100%, 0);
   }
 
   header {
@@ -107,7 +140,7 @@ export default {
 
 @media (max-width: 768px) {
   .el-header {
-    height: 100px;
+    height: var(--mobile-header-height);
   }
   .sidemenu {
     text-align: end;

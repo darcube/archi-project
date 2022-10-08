@@ -1,9 +1,10 @@
 <template>
-  <el-main class="project">
+  <div class="project">
     <div>
       <el-row>
         <el-col>
-          <div class="back-to-projects"><el-icon><Back /></el-icon><router-link to="/projects">Powrót</router-link></div>
+          <div v-if="loading" class="back-to-projects"><el-icon><Back /></el-icon><router-link to="/projects">Powrót</router-link></div>
+          <div v-if="loading">Ładowanie</div>
         </el-col>
       </el-row>
       <el-row>
@@ -12,20 +13,20 @@
               <div class="project-logo"><img style="width: 80%" :src="logoImg"></div>
               <div class="title">{{description.title}}</div>
               <div class="label">Przedmiot</div><div>{{description.subject}}</div>
-              <div class="label">Prowadzący</div><div>{{description.person}}</div>
-              <div class="label">Rok</div><div>{{description.year}}</div>
-              <div class="label">Programy</div><div>{{description.tech}}</div>
-              <div class="text">{{description.desc}}</div>
+              <div v-show="description.person" class="label">Prowadzący</div><div>{{description.person}}</div>
+              <div v-show="description.year" class="label">Rok</div><div>{{description.year}}</div>
+              <div v-show="description.tech" class="label">Programy</div><div>{{description.tech}}</div>
+              <div v-show="description.desc" class="text">{{description.desc}}</div>
             </div>
           </el-col>
-          <el-col :xs="24" :sm="16" class="images">
+          <el-col :xs="24" :sm="16" class="images" id="images">
               <el-row v-for="(img, idx) in images" :key="idx">
-                  <el-col><div><img style="width: 100%" :src="require('../assets/' + img)"></div></el-col>
+                  <el-col><div><img @load="handleLoad" style="width: 100%" v-lazy="require('../assets/' + img)"></div></el-col>
               </el-row>
           </el-col>
       </el-row>
     </div>
-  </el-main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -48,7 +49,9 @@ export default defineComponent({
       },
       images: [] as Array<any>,
       description: text['project' + this.id],
-      logoImg: null
+      logoImg: null,
+      loading: false,
+      imgLoaded: 0
       // assets: ['1/main.png', '2/main.png', '3/main.png', '1/main.png', '2/main.png', '3/main.png', '3/main.png']
       // asset: require('@/assets/main-1.jpg'),
     }
@@ -56,19 +59,22 @@ export default defineComponent({
   computed: {
   },
   methods: {
-    importAll (r : any) {
+    async importAll (r : any) {
       r.keys().filter(x => x.includes('/' + this.id + '/')).forEach((key : string) => {
         if (key.includes('img')) {
           this.images.push(key.slice(2))
         }
       })
+      return true
     },
     parallax () {
-      var s = document.querySelector('#slower') as HTMLElement
-      var yPos = window.pageYOffset / 20
-      // console.log(s, yPos)
-      if (yPos < 100 && s) {
-        s.style.top = 15 - yPos + '%'
+      var s = document.querySelector('#slower') as HTMLElement || 1
+      var img = document.querySelector('#images') as HTMLElement || 1
+      const diff = s.clientHeight - window.innerHeight + 170
+      var imgOffset = window.pageYOffset / img.clientHeight
+      var sOffset = s.clientHeight * imgOffset * 0.8
+      if (sOffset <= diff) {
+        s.style.top = 108 - sOffset + 'px'
       }
     },
     myEventHandler (e) {
@@ -76,6 +82,12 @@ export default defineComponent({
         window.addEventListener('scroll', this.parallax)
       } else {
         window.removeEventListener('scroll', this.parallax)
+      }
+    },
+    handleLoad (todo) {
+      this.imgLoaded++
+      if (this.imgLoaded === this.images.length) {
+        this.loading = false
       }
     }
   },
@@ -87,11 +99,13 @@ export default defineComponent({
     }
     window.addEventListener('resize', this.myEventHandler)
   },
-  mounted () {
-    this.importAll(require.context('../assets/', true, /\.png$/))
-    if (window.innerWidth >= 768) {
-      window.addEventListener('scroll', this.parallax)
-    }
+  async mounted () {
+    this.loading = true
+    var pics = require.context('../assets/', true, /\.png$/)
+    await this.importAll(pics).then(() => { this.loading = false })
+    // if (window.innerWidth >= 768 && this.id !== '5' && this.id !== '6' && this.id !== '7') {
+    window.addEventListener('scroll', this.parallax)
+    // }
   }
 })
 </script>

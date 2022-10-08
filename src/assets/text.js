@@ -32,6 +32,21 @@ export const text = {
     desc: 'Obszar opracowania znajduje się w Poznaniu przy ulicy Jordana, w sąsiedztwie Łazienek Poznańskich i Parku Jordanowskiego, w południowym klinie zieleni Poznania. Projektowany budynek to ośrodek sportowy łączący w sobie różne funkcje rekreacyjno-sportowe. Oprócz kortów do gry w squasha i widowni, znajduje się tu również ścianka wspinaczkowa, siłownia oraz kawiarnia. Działka na której znajduje się obiekt jest otoczona ze wszystkich stron wysokimi topolami, które separują budynek od reszty zabudowań. Dzięki temu wygląd zewnętrzny budynku mógł być dowolnie kształtowany. Jego umiejscowienie i rzut wynika z osi kompozycyjnych prowadzonych od Łazienek i pobliskiego parku oraz z warunków nasłonecznienia. Oś biegnąca od Parku Jordanowskiego wyznaczyła główną komunikację przez foyer obiektu i została zaakcentowana we wnętrzu przez przeszklenie na suficie. Sam budynek ma prostopadłościenną formę, zwiększając swoją wysokość od północy. Na elewacje naniesiono pionowe podziały okienne, biegnące przez całą wysokość ścian, które symbolizują istniejące kiedyś w tym miejscu tory łucznicze. Płyty elewacyjne zgeometryzowano i uwypuklono co zdynamizowało formę.'
   },
   project5: {
-    title: ''
+    title: 'GÓRNIK',
+    subject: 'Wizualizacje wnętrz wykonane w ramach pracy zawodowej dla Górnik Architects',
+    year: '2020',
+    tech: 'Blender, Gimp / Photoshop'
+  },
+  project6: {
+    title: 'Podwórka',
+    subject: 'Koncepcja zagospodarowania przestrzeni Skweru Jasińskiego oraz podwórka przy ulicy Kolejowej w Poznaniu w ramach projektu Archipogotowie we współpracy z miastem Poznań',
+    year: '2020',
+    tech: 'Blender, Gimp'
+  },
+  project7: {
+    title: 'Moje wnętrza',
+    subject: 'Wizualizacje wnętrza wykonane w ramach doskonalenia warsztatu',
+    year: '2020',
+    tech: 'Blender, Gimp'
   }
 }

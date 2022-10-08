@@ -1,21 +1,13 @@
 <template>
-  <el-main class="projects">
+  <div class="projects">
     <div class="asset-area">
-    <el-row>
-      <el-col :xs="24" :md="16"><div><image-button :asset="assets[0]" :projectId="1"></image-button></div></el-col>
-      <el-col :xs="24" :md="8"><div><image-button :asset="assets[1]" :projectId="2"></image-button></div></el-col>
-    </el-row>
-    <el-row>
-      <el-col :xs="24" :md="12"><div><image-button :asset="assets[2]" :projectId="3"></image-button></div></el-col>
-      <el-col :xs="24" :md="12"><div><image-button :asset="assets[3]" :projectId="4"></image-button></div></el-col>
-    </el-row>
-    <el-row>
-      <el-col :xs="24" :md="6"><div><image-button :asset="assets[4]" :projectId="5"></image-button></div></el-col>
-      <el-col :xs="24" :md="12"><div><image-button :asset="assets[5]"></image-button></div></el-col>
-      <el-col :xs="24" :md="6"><div><image-button :asset="assets[6]"></image-button></div></el-col>
-    </el-row>
+      <el-row v-for="(row, idx) in assetsLayout" :key="idx">
+        <el-col v-for="(col, idx) in row" :key="idx" :xs="24" :sm="col.sm">
+          <image-button :asset="assets[col.project - 1]" :projectId="col.project" @handle-load="handleLoad"></image-button>
+        </el-col>
+      </el-row>
     </div>
-  </el-main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -34,7 +26,24 @@ export default defineComponent({
         width: 0,
         height: 0
       },
-      assets: ['1/img0.png', '2/img0.png', '3/img0.png', '4/img0.png', '5/img0.png', '3/img0.png', '3/img0.png']
+      assets: ['1/img0.png', '2/img0.png', '3/img0.png', '4/img0.png', '5/img0.png', '6/img0.png', '7/img0.png'],
+      assetsLayout: [
+        [
+          { sm: 16, project: 1 },
+          { sm: 8, project: 2 }
+        ],
+        [
+          { sm: 12, project: 3 },
+          { sm: 12, project: 4 }
+        ],
+        [
+          { sm: 6, project: 5 },
+          { sm: 12, project: 6 },
+          { sm: 6, project: 7 }
+        ]
+      ],
+      loading: true,
+      imgLoaded: 0
       // asset: require('@/assets/main-1.jpg'),
     }
   },
@@ -44,6 +53,12 @@ export default defineComponent({
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
+    },
+    handleLoad (todo) {
+      this.imgLoaded++
+      if (this.imgLoaded === this.assets.length) {
+        this.loading = false
+      }
     }
   },
   created () {
@@ -57,6 +72,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+
+.loading-area {
+  min-height: 100vh;
+}
 
 .asset-area {
   .el-row {
@@ -81,6 +100,13 @@ export default defineComponent({
  @media (max-width: 768px) {
   .el-main {
     padding: 0;
+  }
+
+  .asset-area {
+    min-height: 100%;
+    .el-row {
+      padding-bottom: 0;
+    }
   }
  }
 

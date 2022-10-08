@@ -1,7 +1,9 @@
 <template>
 <el-container>
   <app-header />
-  <router-view />
+  <el-main>
+    <router-view />
+  </el-main>
   <app-footer />
 </el-container>
 </template>
@@ -33,7 +35,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 
 #nav {
@@ -49,7 +51,13 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+.el-main {
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
 
+@media (max-width: 768px) {
+  .el-main {
+    min-height: calc(100vh - var(--mobile-header-height) - var(--footer-height));
+  }
 }
 </style>
